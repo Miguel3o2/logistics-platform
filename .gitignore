@@ -48,6 +48,8 @@ standalone_admin_password.txt
 airflow.cfg
 airflow.db
 
+venv311/
+
 docker-compose.override.yml
 docker-compose.prod.yml
 
