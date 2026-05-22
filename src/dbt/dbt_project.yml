@@ -1,0 +1,43 @@
+name: logistics_platform
+version: '1.0.0'
+config-version: 2
+
+profile: logistics
+
+model-paths:      ["models"]
+test-paths:       ["tests"]
+macro-paths:      ["macros"]
+analysis-paths:   ["analyses"]
+docs-paths:       ["docs"]
+
+target-path:  "target"
+clean-targets: ["target", "dbt_packages"]
+
+require-dbt-version: ">=1.9.0"
+
+models:
+  logistics_platform:
+    staging:
+      +materialized: incremental
+      +schema:       staging
+      +tags:         [staging]
+
+    silver:
+      +materialized: incremental
+      +schema:       silver
+      +tags:         [silver]
+
+    gold:
+      +materialized: incremental
+      +schema:       gold
+      +tags:         [gold]
+
+      mart_fleet_performance:
+        +materialized: incremental
+      mart_route_analytics:
+        +materialized: incremental
+
+tests:
+  logistics_platform:
+    +store_failures: true
+    +schema:         test_failures

@@ -1,0 +1,22 @@
+logistics:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: localhost
+      port: 55432
+      user: logistics
+      password: logistics123
+      dbname: logistics_ops
+      schema: silver
+      threads: 4
+
+    prod:
+      type: postgres
+      host: postgres-operational    # docker service name
+      port: 5432
+      user: logistics
+      password: "{{ env_var('POSTGRES_PASSWORD') }}"
+      dbname: logistics_ops
+      schema: silver
+      threads: 4

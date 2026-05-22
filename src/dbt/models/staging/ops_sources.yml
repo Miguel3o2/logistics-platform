@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: ops
+    schema: logistics
+    tables:
+      - name: vehicles
+      - name: drivers
+      - name: shipments
+      - name: maintenance_records

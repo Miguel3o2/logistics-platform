@@ -1,0 +1,59 @@
+version: 2
+
+sources:
+  - name: silver
+    description: >
+      Cleaned, validated data promoted from Bronze.
+      All monetary values in integer cents. Timestamps are UTC.
+    schema: silver
+    freshness:
+      warn_after:  {count: 2, period: hour}
+      error_after: {count: 6, period: hour}
+    loaded_at_field: ingest_ts
+
+    tables:
+      - name: telemetry
+        description: Cleaned vehicle telematics — one row per sensor reading
+        freshness:
+          warn_after:  {count: 30, period: minute}
+          error_after: {count: 2,  period: hour}
+        columns:
+          - name: vehicle_id
+            tests: [not_null]
+          - name: sensor_ts
+            tests: [not_null]
+          - name: engine_health_score
+            tests: [not_null]
+          - name: speed_kmh
+
+      - name: dim_vehicles
+        description: SCD Type 2 vehicle dimension
+        columns:
+          - name: vehicle_id
+            tests: [not_null]
+          - name: is_current
+            tests: [not_null]
+          - name: effective_from
+            tests: [not_null]
+
+      - name: shipments
+        description: Current-state shipments (upserted from CDC)
+        columns:
+          - name: shipment_id
+            tests: [not_null, unique]
+          - name: status
+            tests:
+              - accepted_values:
+                  values: [PENDING, IN_TRANSIT, DELIVERED, DELAYED, RETURNED]
+          - name: weight_kg
+
+      - name: enriched_telemetry
+        description: Stream-to-stream join output — telemetry enriched with weather
+        freshness:
+          warn_after:  {count: 30, period: minute}
+          error_after: {count: 2,  period: hour}
+        loaded_at_field: sensor_ts
+        columns:
+          - name: vehicle_id
+            tests: [not_null]
+          - name: road_risk_score
