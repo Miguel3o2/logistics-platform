@@ -1,6 +1,7 @@
 
 # Global Logistics & Predictive Analytics Platform
 
+
 End-to-end real-time data engineering platform that ingests vehicle telematics,
 relational CDC, and external weather data — processes it through a multi-source
 Medallion architecture — and serves ETA predictions and engine failure alerts
@@ -9,6 +10,7 @@ via a production FastAPI inference server.
 ---
 
 ## Architecture at a glance
+
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
@@ -89,6 +91,7 @@ via a production FastAPI inference server.
 ---
 
 ## What makes this different from a standard Medallion pipeline
+
 
 | Feature | Standard pipeline | This project |
 |---|---|---|
@@ -181,6 +184,7 @@ curl -X POST http://localhost:8000/predict/eta \
 
 ## Service URLs
 
+
 | Service | URL | Login |
 |---|---|---|
 | Kafka UI | http://localhost:8080 | — |
@@ -197,6 +201,7 @@ curl -X POST http://localhost:8000/predict/eta \
 ---
 
 ## Project structure
+
 
 ```
 logistics-platform/
