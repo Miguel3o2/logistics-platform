@@ -1,3 +1,4 @@
+
 # Global Logistics & Predictive Analytics Platform
 
 End-to-end real-time data engineering platform that ingests vehicle telematics,
@@ -278,5 +279,6 @@ rankings.
 **ML Engineer:**
 - Built and deployed a FastAPI ML inference server serving calibrated GBT predictions for ETA (MAE < 1h) and engine failure probability (AUROC + Brier score reported), loading models from MLflow Model Registry with zero-downtime hot-reload via background task.
 - Engineered ML feature stores in Delta Gold covering 18 ETA features (route, vehicle, weather, time) and 12 hourly engine health features (temperature trend, DTC rate, oil pressure) — staleness-tested by a custom dbt SQL assertion.
-#   l o g i s t i c s - p l a t f o r m  
+#   l o g i s t i c s - p l a t f o r m 
+ 
  
